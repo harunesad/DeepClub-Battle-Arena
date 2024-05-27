@@ -39,6 +39,23 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - Attack
+  - AttackMelee
+  - BulletAttack
+  - BulletSuperAttack
+  - ChooseCharacter
+  - Hide
+  - LineActive
+  - MeleeReload
+  - MyName
+  - Power
+  - PowerupAttack
+  - PowerupAttackMelee
+  - Show
+  - SuperLineActive
+  - SuperMeleeReload
+  - TimeReduce
+  - TokenCollect
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
