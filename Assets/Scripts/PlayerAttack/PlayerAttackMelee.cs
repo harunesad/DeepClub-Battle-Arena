@@ -17,7 +17,7 @@ public class PlayerAttackMelee : MonoBehaviour
     bool nameFind;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LineRenderer line;
-    [SerializeField] GameObject attackText, attackLookat;
+    [SerializeField] GameObject attackText, attackLookat, enemyDetection;
     [SerializeField] float lineDistance;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float radius;
@@ -64,6 +64,7 @@ public class PlayerAttackMelee : MonoBehaviour
                 {
                     transform.LookAt(item.transform);
                     AttackSword(item, player.attack, false);
+                    enemyDetection.SetActive(true);
                     break;
                 }
                 else if (item.gameObject.layer == 9)
@@ -71,8 +72,13 @@ public class PlayerAttackMelee : MonoBehaviour
                     transform.LookAt(item.transform);
                     transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                     AttackSwordPowerup(item, player.attack);
+                    enemyDetection.SetActive(true);
                     break;
                 }
+            }
+            if (colliders.Length == 0)
+            {
+                enemyDetection.SetActive(false);
             }
             return;
         }
