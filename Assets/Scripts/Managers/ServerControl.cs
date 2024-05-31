@@ -10,34 +10,27 @@ public class ServerControl : MonoBehaviourPunCallbacks
 {
     public static ServerControl server;
     public List<GameObject> character;
-    public GameObject mainAvatar, player;
+    public GameObject player;
     public List<Transform> spawnPoints;
     public List<GameObject> floors;
-    public GameObject  mainFloor, mainShip;
     public int chooseChar, modId;
-    public List<int> avatarsId;
     public GameObject photonObj;
-    public GameObject avatar;
-    //public string avatarAddressableKey;
-    public int /*myTeamNumber, teamNumber,*/ step, viewId, index, killCount;
+    public int step, index, killCount;
     public string nickName;
-    public bool chatAtcive;
-    public GameObject electric, lift, portal;
+    public GameObject electric;
     float electricPosX, electricPosZ;
-    public bool start, leave, mod;
+    public bool start, leave;
     public List<GameObject> powerups, collectable;
-    Vector3 camPos, shipPos;
+    Vector3 camPos;
     Quaternion camRot;
     int roomIndex, lobbyIndex;
     public List<GameObject> newPlayers;
     public ParticleSystem lightning;
     public float chooseSound, effectSound;
-    public GameObject minimapCam, cMFreeLook;
     [SerializeField] AudioClip win, gameOver;
     float result, myResult;
     public float coinCount, tokenCount;
     public bool wallet;
-    //[SerializeField] AssetLabelReference assetLabel;
     DefaultPool pool;
     //Server-Lobby-Room
     private void Awake()
@@ -60,7 +53,6 @@ public class ServerControl : MonoBehaviourPunCallbacks
 
         camPos = Camera.main.transform.position;
         camRot = Camera.main.transform.rotation;
-        shipPos = mainShip.transform.position;
         //play.onClick.AddListener(CharacterChoose);
         //PhotonNetwork.ConnectUsingSettings();//Servera bağlanma isteği
         //PhotonNetwork.JoinLobby();//Lobiye bağlanma
@@ -186,23 +178,9 @@ public class ServerControl : MonoBehaviourPunCallbacks
         result *= (1 + level);
         leave = true;
     }
-    //1. step bittikten sonra 2. stepe başlamak için oyuna girme
-    void MainExit()
+    public void ModActive()
     {
-        chatAtcive = false;
-        UIManager.uIManager.NewStepOne();
-        Camera.main.transform.position = camPos;
-        Camera.main.transform.rotation = camRot;
-        PhotonNetwork.JoinLobby();
-    }
-    void ModActive()
-    {
-        modId = -1;
-        chatAtcive = false;
-        UIManager.uIManager.StepOne();
-        mainFloor.SetActive(false);
-        mainShip.SetActive(false);
-        cMFreeLook.SetActive(false);
+        //UIManager.uIManager.StepOne();
         Camera.main.transform.rotation = Quaternion.Euler(50, 0, 0);
         PhotonNetwork.JoinLobby();
     }
@@ -228,47 +206,52 @@ public class ServerControl : MonoBehaviourPunCallbacks
             powerups[i].transform.GetChild(powerups[i].transform.childCount - 3).rotation = Quaternion.Euler(-90, 180, 180);
             powerups[i].transform.GetChild(powerups[i].transform.childCount - 4).rotation = Quaternion.Euler(-90, 270, 90);
         }
-        for (int i = 0; i < collectable.Count; i++)
-        {
-            collectable[i].SetActive(false);
-            collectable[i].transform.GetChild(1).gameObject.SetActive(false);
-            collectable[i].transform.GetChild(collectable[i].transform.childCount - 1).rotation = Quaternion.Euler(-90, 0, 0);
-            collectable[i].transform.GetChild(collectable[i].transform.childCount - 2).rotation = Quaternion.Euler(-90, 90, 270);
-            collectable[i].transform.GetChild(collectable[i].transform.childCount - 3).rotation = Quaternion.Euler(-90, 180, 180);
-            collectable[i].transform.GetChild(collectable[i].transform.childCount - 4).rotation = Quaternion.Euler(-90, 270, 90);
-        }
-        mainShip.transform.position = shipPos;
+        //for (int i = 0; i < collectable.Count; i++)
+        //{
+        //    collectable[i].SetActive(false);
+        //    collectable[i].transform.GetChild(1).gameObject.SetActive(false);
+        //    collectable[i].transform.GetChild(collectable[i].transform.childCount - 1).rotation = Quaternion.Euler(-90, 0, 0);
+        //    collectable[i].transform.GetChild(collectable[i].transform.childCount - 2).rotation = Quaternion.Euler(-90, 90, 270);
+        //    collectable[i].transform.GetChild(collectable[i].transform.childCount - 3).rotation = Quaternion.Euler(-90, 180, 180);
+        //    collectable[i].transform.GetChild(collectable[i].transform.childCount - 4).rotation = Quaternion.Euler(-90, 270, 90);
+        //}
         Camera.main.transform.position = camPos;
         Camera.main.transform.rotation = camRot;
         UIManager.uIManager.StepZero();
-        PhotonNetwork.JoinLobby();
+        modId = -1;
+        chooseChar = -1;
+        //PhotonNetwork.Disconnect();
+        //PhotonNetwork.JoinLobby();
     }
     public override void OnConnectedToMaster()
     {
         //Servera bağlanınca çalışan callback fonksiyon
         Debug.Log("Servera bağlandı");
-        PhotonNetwork.JoinLobby();
+        if (step == 0)
+        {
+            UIManager.uIManager.LoadingComplete(UIManager.uIManager.gameBeforeLoading);
+        }
+        else if (step == 1)
+        {
+            Rejoin();
+        }
+        //PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedLobby()
     {
         Debug.Log("Lobiye bağlandı");
-        if (mod)
-        {
-            RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 20, IsOpen = true, IsVisible = true };
-            PhotonNetwork.JoinOrCreateRoom("Mod", roomOptions, TypedLobby.Default);
-        }
-        else if (step == 0)
-        {
-            RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 20, IsOpen = true, IsVisible = true };
-            PhotonNetwork.JoinOrCreateRoom("Home", roomOptions, TypedLobby.Default);
-        }
-        else if (step == 1)
+        //if (step == 0)
+        //{
+        //    RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 20, IsOpen = true, IsVisible = true };
+        //    PhotonNetwork.JoinOrCreateRoom("Home", roomOptions, TypedLobby.Default);
+        //}
+        if (step == 0)
         {
             Debug.Log("Lobby" + modId + lobbyIndex);
             RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 4, IsOpen = true, IsVisible = true };
             PhotonNetwork.JoinOrCreateRoom("Lobby" + modId + lobbyIndex, roomOptions, TypedLobby.Default);
         }
-        else if (step == 2)
+        else if (step == 1)
         {
             RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 4, IsOpen = true, IsVisible = true };
             PhotonNetwork.JoinOrCreateRoom("Room" + modId + roomIndex, roomOptions, TypedLobby.Default);
@@ -303,31 +286,23 @@ public class ServerControl : MonoBehaviourPunCallbacks
     //}
     public override void OnJoinedRoom()
     {
-        if (mod)
-        {
-            mod = false;
-            chooseChar = -1;
-            modId = -1;
-            UIManager.uIManager.LoadingComplete(UIManager.uIManager.modLoading);
-        }
-        else if (step == 0)
-        {
-            UIManager.uIManager.LoadingComplete(UIManager.uIManager.mainLoading);
-            //LoadAddressablePrefab();
-            pool = PhotonNetwork.PrefabPool as DefaultPool;
-            if (pool.ResourceCache.Count == 0)
-            {
-                pool.ResourceCache.Add(avatar.name, avatar);
-            }
-            mainAvatar = PhotonNetwork.Instantiate(pool.ResourceCache[avatar.name].name, Vector3.zero, Quaternion.identity, (byte)pool.ResourceCache[avatar.name].GetPhotonView().ViewID, null);
-            mainAvatar.GetPhotonView().Owner.NickName = nickName;
-        }
-        else if (step == 1)
+        //if (step == 0)
+        //{
+        //    UIManager.uIManager.LoadingComplete(UIManager.uIManager.mainLoading);
+        //    //LoadAddressablePrefab();
+        //    pool = PhotonNetwork.PrefabPool as DefaultPool;
+        //    if (pool.ResourceCache.Count == 0)
+        //    {
+        //        //pool.ResourceCache.Add(avatar.name, avatar);
+        //    }
+        //}
+        if (step == 0)
         {
             player = PhotonNetwork.Instantiate(photonObj.name, Vector3.zero, Quaternion.identity, (byte)photonObj.GetPhotonView().ViewID, null);
+            player.GetPhotonView().Owner.NickName = nickName;
             UIManager.uIManager.LoadingComplete(UIManager.uIManager.gameBeforeLoading);
         }
-        else if (step == 2)
+        else if (step == 1)
         {
             for (int i = 0; i < powerups.Count; i++)
             {
@@ -335,12 +310,12 @@ public class ServerControl : MonoBehaviourPunCallbacks
                 powerups[i].SetActive(true);
                 powerups[i].layer = 9;
             }
-            for (int i = 0; i < collectable.Count; i++)
-            {
-                collectable[i].transform.position = floors[modId].transform.GetChild(floors[modId].transform.childCount - 1 - i).position;
-                collectable[i].SetActive(true);
-                collectable[i].layer = 9;
-            }
+            //for (int i = 0; i < collectable.Count; i++)
+            //{
+            //    collectable[i].transform.position = floors[modId].transform.GetChild(floors[modId].transform.childCount - 1 - i).position;
+            //    collectable[i].SetActive(true);
+            //    collectable[i].layer = 9;
+            //}
             for (int i = 0; i < spawnPoints.Count; i++)
             {
                 spawnPoints[i] = floors[modId].transform.GetChild(floors[modId].transform.childCount - 1 - i - 8);
@@ -363,19 +338,16 @@ public class ServerControl : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         //Odadan ayrılınca çalışan callback fonksiyon
-        if (mod)
-        {
-            ModActive();
-        }
-        else if (step == 0)
+        if (step == 0)
         {
             step = 1;
-            MainExit();
+            //Rejoin();
+            //ModActive();
         }
         else if (step == 1)
         {
             step = 2;
-            Rejoin();
+            //Rejoin();
         }
         else if (step == 2)
         {

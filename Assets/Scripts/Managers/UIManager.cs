@@ -13,35 +13,25 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager uIManager;
     public TextMeshProUGUI nicknameText, playerCount;
-    public List<Button> choose, mods, avatarPanel;
-    public List<Properties> avatarButtons;
+    public List<Button> choose, mods;
     public List<TextMeshProUGUI> playersNicknames;
     public List<Image> playersCharacter;
     public Button play, settings, character;
-    public Button messageOpen, leave, playersCam, mainHome, home, playGame, moveGame, sound, survivor, multiplayer, skip;
-    public TMP_InputField message, messageArea;
-    public TextMeshProUGUI killInfo, deathInfo, killCountText, win, time, coin, collect, xpLevel;
-    public GameObject killImage, warningImage, damagePopup, settingsPanel;
-    public Image mainLoading, modLoading, gameBeforeLoading, gameLoading, xpBar, interact;
+    public Button leave, playersCam, mainHome, home, playGame, survivor, multiplayer;
+    public TextMeshProUGUI killInfo, deathInfo, killCountText, win, time, coin, collect;
+    public GameObject killImage, damagePopup, settingsPanel;
+    public Image gameBeforeLoading, gameLoading;
     public List<Sprite> characterImages;
     public FloatingJoystick moveJoystick;
     public FixedJoystick shootJoystick, superJoystick;
-    [SerializeField] GameObject canvas, freeLookWeb, modBg;
-    [SerializeField] List<GameObject> avatarPanels;
-    [SerializeField] Sprite open, close;
-    [SerializeField] Image gameBackground, charactersBackground, settingsBackgorund, nicknameBackground;
-    public Image waitBackground, freeLookMobile;
-    [SerializeField] RawImage minimap;
+    [SerializeField] GameObject canvas, modBg;
+    [SerializeField] Image gameBackground, charactersBackground, settingsBackgorund;
+    public Image waitBackground;
     [SerializeField] AudioClip click, loadingSound;
-    public AudioSource chooseSource, loadingSource, birdSource;
+    public AudioSource chooseSource, loadingSource;
     [SerializeField] Sprite selectCharacter, unSelectCharacter;
     [SerializeField] Slider effectsound, mainSound;
-    [SerializeField] List<Sprite> hairs;
-    [SerializeField] VideoPlayer videoPlayer;
-    [SerializeField] VideoClip first, second;
-    public Sprite winSprite, loseSprite, closeSound, openSound;
-    public bool ai;
-    [SerializeField] RawImage soundRaw;
+    public Sprite winSprite, loseSprite;
     int videoStep;
     private void Awake()
     {
@@ -53,238 +43,41 @@ public class UIManager : MonoBehaviour
         mods[1].onClick.AddListener(delegate { ModSelect(1); });
         mods[2].onClick.AddListener(delegate { ModSelect(2); });
         mods[3].onClick.AddListener(delegate { ModSelect(3); });
-        avatarPanel[0].onClick.AddListener(delegate { AvatarPanelsActive(0); });
-        avatarPanel[1].onClick.AddListener(delegate { AvatarPanelsActive(1); });
-        avatarPanel[2].onClick.AddListener(delegate { AvatarPanelsActive(2); });
-        avatarPanel[3].onClick.AddListener(delegate { AvatarPanelsActive(3); });
-        avatarPanel[4].onClick.AddListener(delegate { AvatarPanelsActive(4); });
-        avatarPanel[5].onClick.AddListener(delegate { AvatarPanelsActive(5); });
 
-        play.onClick.AddListener(Login);
         character.onClick.AddListener(Games);
         multiplayer.onClick.AddListener(Character);
         survivor.onClick.AddListener(SurvivorOpen);
         settings.onClick.AddListener(Settings);
         playGame.onClick.AddListener(WaitPlayers);
         leave.onClick.AddListener(LeaveRoom);
-        mainHome.onClick.AddListener(LeaveRoom);
+        mainHome.onClick.AddListener(LeaveGame);
         home.onClick.AddListener(LeaveSettings);
         playersCam.onClick.AddListener(PlayerCamChange);
-        messageOpen.onClick.AddListener(MessageOpen);
-        moveGame.onClick.AddListener(GameMove);
-        sound.onClick.AddListener(SoundState);
-        skip.onClick.AddListener(SkipVideo);
-        string videoURL = System.IO.Path.Combine(Application.streamingAssetsPath, "Deeplay.mp4");
-
-        videoPlayer.url = videoURL;
-        //videoPlayer.Play();
-        videoPlayer.prepareCompleted += Prepared;
-        videoPlayer.Prepare();
-        videoPlayer.time = .1f;
-
-        videoPlayer.loopPointReached += OnVideoEnd;
     }
-    void Prepared(VideoPlayer vp)
+    void LeaveGame()
     {
-        vp.Play();
-    }
-    void SkipVideo()
-    {
-        if (videoStep == 0)
-        {
-            videoPlayer.time = 2;
-        }
-        else if (videoStep == 1)
-        {
-            videoPlayer.time = 19;
-        }
-    }
-    void OnVideoEnd(VideoPlayer vp)
-    {
-        // Video bittiðinde yapýlacak iþlemler
-        if (videoStep == 0)
-        {
-            string videoURL = System.IO.Path.Combine(Application.streamingAssetsPath, "Storytelling.mp4");
-
-            videoPlayer.url = videoURL;
-            videoPlayer.prepareCompleted += Prepared;
-            videoPlayer.Prepare();
-            //videoPlayer.clip = second;
-            videoStep++;
-        }
-        else if (videoStep == 1)
-        {
-            videoPlayer.gameObject.SetActive(false);
-            soundRaw.gameObject.SetActive(false);
-            videoStep++;
-        }
-        Debug.Log("Video bitti!");
-        // Buraya istediðiniz kodlarý ekleyin
-    }
-    void AvatarPanelsActive(int avatarPanel)
-    {
-        if (sound.GetComponent<Image>().sprite == closeSound)
-        {
-            AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        }
-        for (int i = 0; i < avatarPanels.Count; i++)
-        {
-            avatarPanels[i].gameObject.SetActive(false);
-        }
-        avatarPanels[avatarPanel].gameObject.SetActive(true);
-    }
-    public void AvatarPartsSelect(int partId)
-    {
-        if (sound.GetComponent<Image>().sprite == closeSound)
-        {
-            AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        }
-        int panelId = -1;
-        for (int i = 0; i < avatarPanels.Count; i++)
-        {
-            if (avatarPanels[i].activeSelf)
-            {
-                panelId = i;
-            }
-        }
-        ServerControl.server.avatarsId[panelId] = partId;
-        if (panelId == 0)
-        {
-            avatarPanel[panelId].GetComponent<Image>().sprite = avatarButtons[panelId].buttons[partId].GetComponent<Image>().sprite;
-            avatarPanel[1].GetComponent<Image>().sprite = hairs[partId];
-        }
-        else if (panelId >= 1)
-        {
-            ColorBlock colorBlock = avatarPanel[panelId].GetComponent<Button>().colors;
-            colorBlock.normalColor = avatarButtons[panelId].buttons[partId].GetComponent<Button>().colors.normalColor;
-            colorBlock.highlightedColor = avatarButtons[panelId].buttons[partId].GetComponent<Button>().colors.highlightedColor;
-            colorBlock.selectedColor = avatarButtons[panelId].buttons[partId].GetComponent<Button>().colors.selectedColor;
-            avatarPanel[panelId].GetComponent<Button>().colors = colorBlock;
-        }
-    }
-    void SoundState()
-    {
-        if (sound.GetComponent<Image>().sprite == closeSound)
-        {
-            sound.GetComponent<Image>().sprite = openSound;
-        }
-        else
-        {
-            sound.GetComponent<Image>().sprite = closeSound;
-        }
-        if (sound.GetComponent<Image>().sprite == closeSound)
-        {
-            AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        }
-    }
-    void Login()
-    {
-        if (nicknameText.text.Length >= 6 && !nicknameText.text.Contains(" "))
-        {
-            if (ServerControl.server.step == 0)
-            {
-                if (sound.GetComponent<Image>().sprite == closeSound)
-                {
-                    AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-                }
-                if (sound.GetComponent<Image>().sprite == closeSound)
-                {
-                    birdSource.Play();
-                }
-                LoadingStart(mainLoading);
-                PhotonNetwork.ConnectUsingSettings();
-                ServerControl.server.nickName = nicknameText.text;
-                StepZero();
-            }
-        }
-    }
-    public void Interact(bool state, string message)
-    {
-        interact.GetComponentInChildren<TextMeshProUGUI>().text = message;
-        interact.gameObject.SetActive(state);
-    }
-    void GameMove()
-    {
-        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        if (moveGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text == "OYUNA GÝT!")
-        {
-            ServerControl.server.mainAvatar.GetComponent<NavMeshAgent>().enabled = true;
-            ServerControl.server.mainAvatar.GetComponent<NavMeshAgent>().isStopped = false;
-            ServerControl.server.mainAvatar.GetComponent<NavMeshAgent>().SetDestination(ServerControl.server.portal.transform.position);
-            ai = true;
-            moveGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "DUR!";
-        }
-        else
-        {
-            moveGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "OYUNA GÝT!";
-            ServerControl.server.mainAvatar.GetComponent<NavMeshAgent>().isStopped = true;
-            ai = false;
-            ServerControl.server.mainAvatar.GetComponent<NavMeshAgent>().enabled = false;
-        }
-        for (int i = 0; i < ServerControl.server.mainAvatar.transform.childCount; i++)
-        {
-            if (ServerControl.server.mainAvatar.transform.GetChild(i).gameObject.activeSelf)
-            {
-                ServerControl.server.mainAvatar.transform.GetChild(i).GetComponent<Animator>().SetBool("Walk", ai);
-            }
-        }
-    }
-    public void MessageOpen()
-    {
-        if (sound.GetComponent<Image>().sprite == closeSound)
-        {
-            AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        }
-        ServerControl.server.chatAtcive = !ServerControl.server.chatAtcive;
-        message.gameObject.SetActive(!message.gameObject.activeSelf);
-        messageArea.gameObject.SetActive(!messageArea.gameObject.activeSelf);
-        messageArea.GetComponentInChildren<Scrollbar>().value = 1;
-        if (message.gameObject.activeSelf)
-        {
-            messageOpen.GetComponent<Image>().sprite = close;
-        }
-        else
-        {
-            messageOpen.GetComponent<Image>().sprite = open;
-        }
-        warningImage.SetActive(false);
-    }
-    void LeaveRoom()
-    {
-        birdSource.Play();
-        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        LoadingStart(mainLoading);
-        ServerControl.server.step = 2;
-        leave.gameObject.SetActive(false);
-        mainHome.gameObject.SetActive(false);
-        PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.LeaveRoom();
-    }
-    void SurvivorOpen()
-    {
-        Application.OpenURL("https://deeplaystudio.itch.io/survivor");
-    }
-    void Settings()
-    {
-        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        UIClose();
-        home.gameObject.SetActive(true);
-        settingsBackgorund.gameObject.SetActive(true);
-        settingsPanel.SetActive(true);
-    }
-    void LeaveSettings()
-    {
-        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
-        UIClose();
-        StepOne();
+        Application.Quit();
     }
     void Games()
     {
+        UIClose();
         AudioSource.PlayClipAtPoint(click, transform.position, .5f);
         survivor.gameObject.SetActive(true);
         multiplayer.gameObject.SetActive(true);
         home.gameObject.SetActive(true);
         modBg.gameObject.SetActive(true);
+    }
+    void Settings()
+    {
+        UIClose();
+        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
+        home.gameObject.SetActive(true);
+        settingsBackgorund.gameObject.SetActive(true);
+        settingsPanel.SetActive(true);
+    }
+    void SurvivorOpen()
+    {
+        Application.OpenURL("https://deeplaystudio.itch.io/survivor");
     }
     void Character()
     {
@@ -294,6 +87,12 @@ public class UIManager : MonoBehaviour
         chooseSource.volume = ServerControl.server.chooseSound;
         chooseSource.Play();
         StepOneOne();
+    }
+    void LeaveSettings()
+    {
+        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
+        UIClose();
+        StepOne();
     }
     void ModSelect(int index)
     {
@@ -312,23 +111,28 @@ public class UIManager : MonoBehaviour
     }
     void WaitPlayers()
     {
-        if (ServerControl.server.chooseChar != -1 && ServerControl.server.modId != -1)
+        bool gameState = nicknameText.text.Length > 5 && !nicknameText.text.Contains(" ");
+        if (ServerControl.server.chooseChar != -1 && ServerControl.server.modId != -1 && gameState)
         {
+            UIClose();
             chooseSource.Stop();
             loadingSource.Play();
             choose[ServerControl.server.chooseChar].transform.parent.GetComponent<Image>().sprite = unSelectCharacter;
             AudioSource.PlayClipAtPoint(click, transform.position, .5f);
             LoadingStart(gameBeforeLoading);
-            for (int i = 0; i < mods.Count; i++)
-            {
-                mods[i].gameObject.SetActive(false);
-            }
-            for (int i = 0; i < choose.Count; i++)
-            {
-                choose[i].transform.parent.gameObject.SetActive(false);
-            }
-            playGame.gameObject.SetActive(false);
-            PhotonNetwork.LeaveRoom();
+            ServerControl.server.nickName = nicknameText.text;
+            //for (int i = 0; i < mods.Count; i++)
+            //{
+            //    mods[i].gameObject.SetActive(false);
+            //}
+            //for (int i = 0; i < choose.Count; i++)
+            //{
+            //    choose[i].transform.parent.gameObject.SetActive(false);
+            //}
+            //playGame.gameObject.SetActive(false);
+            ServerControl.server.ModActive();
+            //ServerControl.server.step = 1;
+            //PhotonNetwork.LeaveRoom();
         }
     }
     //Öldükten sonra butona basarak farklý oyuncularýn kameralarýna geçme
@@ -365,14 +169,15 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    public void LoadingComplete(Image loading)
+    void LeaveRoom()
     {
-        birdSource.Stop();
-        loading.DOColor(new Color(loading.color.r, loading.color.g, loading.color.b, 0), .1f).SetEase(Ease.Linear).OnComplete(() => 
-        {
-            loadingSource.Stop();
-            loading.gameObject.SetActive(false);
-        });
+        AudioSource.PlayClipAtPoint(click, transform.position, .5f);
+        LoadingStart(gameLoading);
+        ServerControl.server.step = 2;
+        leave.gameObject.SetActive(false);
+        mainHome.gameObject.SetActive(false);
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.LeaveRoom();
     }
     public void LoadingStart(Image loading)
     {
@@ -380,12 +185,16 @@ public class UIManager : MonoBehaviour
         //loading.GetComponent<RandomInfo>().InfoText();
         loading.DOColor(new Color(loading.color.r, loading.color.g, loading.color.b, 1), .1f).SetEase(Ease.Linear);
     }
+    public void LoadingComplete(Image loading)
+    {
+        loading.DOColor(new Color(loading.color.r, loading.color.g, loading.color.b, 0), .1f).SetEase(Ease.Linear).OnComplete(() => 
+        {
+            loadingSource.Stop();
+            loading.gameObject.SetActive(false);
+        });
+    }
     void UIClose()
     {
-        if (freeLookWeb.activeSelf)
-        {
-            freeLookWeb.SetActive(false);
-        }
         for (int i = 0; i < canvas.transform.childCount - 4; i++)
         {
             if (canvas.transform.GetChild(i).gameObject.activeSelf)
@@ -397,27 +206,11 @@ public class UIManager : MonoBehaviour
     public void StepZero()
     {
         UIClose();
-        StepZeroOne();
-        nicknameBackground.gameObject.gameObject.SetActive(true);
-        nicknameBackground.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ServerControl.server.nickName;
-        nicknameBackground.transform.GetChild(0).GetComponent<Image>().sprite = avatarPanel[0].GetComponent<Image>().sprite;
-        minimap.gameObject.SetActive(true);
-        messageArea.text = "";
-        messageOpen.gameObject.SetActive(true);
-        playerCount.gameObject.SetActive(true);
-        moveGame.gameObject.SetActive(true);
-#if UNITY_ANDROID || UNITY_IOS
-        freeLookMobile.gameObject.SetActive(true);
-        moveJoystick.gameObject.SetActive(true);
-#endif
-#if UNITY_WEBGL
-        freeLookWeb.SetActive(true);
-#endif
-    }
-    void StepZeroOne()
-    {
-        ServerControl.server.mainFloor.SetActive(true);
-        ServerControl.server.mainShip.SetActive(true);
+        gameBackground.gameObject.SetActive(true);
+        coin.gameObject.SetActive(true);
+        play.gameObject.SetActive(true);
+        settings.gameObject.SetActive(true);
+        mainHome.gameObject.SetActive(true);
     }
     public void StepOne()
     {
@@ -445,6 +238,9 @@ public class UIManager : MonoBehaviour
         choose[3].onClick.AddListener(delegate { CharacterChoose(4); });
         charactersBackground.gameObject.SetActive(true);
         playGame.gameObject.SetActive(true);
+        nicknameText.transform.parent.parent.gameObject.SetActive(true);
+        PhotonNetwork.ConnectUsingSettings();
+        LoadingStart(gameBeforeLoading);
     }
     public void NewStepOne()
     {

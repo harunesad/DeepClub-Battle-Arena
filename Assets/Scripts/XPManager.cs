@@ -14,7 +14,7 @@ public class XPManager : MonoBehaviour
     }
     void Start()
     {
-        UIManager.uIManager.xpLevel.text = "Level " + xpLevel;
+        //UIManager.uIManager.xpLevel.text = "Level " + xpLevel;
     }
     void Update()
     {
@@ -23,13 +23,13 @@ public class XPManager : MonoBehaviour
     public void XPIncrease(float inc)
     {
         xpAmount += inc;
-        UIManager.uIManager.xpBar.DOFillAmount(xpAmount, .5f).SetEase(Ease.Linear);
+        //UIManager.uIManager.xpBar.DOFillAmount(xpAmount, .5f).SetEase(Ease.Linear);
         if (xpAmount >= 1)
         {
             xpLevel++;
-            UIManager.uIManager.xpLevel.text = "Level " + xpLevel;
+            //UIManager.uIManager.xpLevel.text = "Level " + xpLevel;
             xpAmount = 0;
-            UIManager.uIManager.xpBar.DOFillAmount(xpAmount, .5f).SetEase(Ease.Linear);
+            //UIManager.uIManager.xpBar.DOFillAmount(xpAmount, .5f).SetEase(Ease.Linear);
         }
     }
 }

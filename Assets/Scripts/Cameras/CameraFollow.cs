@@ -4,7 +4,7 @@ using TMPro;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target, newTarget; // Oyuncu karakteri
-    public Vector3 playerOffset, avatarOffset, desiredPosition;
+    public Vector3 playerOffset, desiredPosition;
     public float smoothSpeed = 0.125f;
     public int playerIndex;
     void LateUpdate()
@@ -22,20 +22,10 @@ public class CameraFollow : MonoBehaviour
     {
         if (target != null)
         {
-            if (ServerControl.server.mainAvatar == null)
-            {
-                desiredPosition = target.position + playerOffset;
-            }
-            else if (ServerControl.server.mainAvatar != null)
-            {
-                desiredPosition = target.position + avatarOffset;
-            }
+            desiredPosition = target.position + playerOffset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * 10);
             transform.position = smoothedPosition;
-            if (ServerControl.server.mainAvatar == null)
-            {
-                transform.LookAt(target);
-            }
+            transform.LookAt(target);
         }
     }
     void TargetChange()

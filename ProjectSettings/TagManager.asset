@@ -3,26 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - View
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Electric
   - Water
   - UI
   - 
   - 
   - 
+  - Powerup
+  - Power
   - 
+  - Player
+  - Grass
+  - Grasses
+  - PlayerArea
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
   - 
   - 
   - 

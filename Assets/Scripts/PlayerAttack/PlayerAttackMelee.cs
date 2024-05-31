@@ -20,6 +20,7 @@ public class PlayerAttackMelee : MonoBehaviour
     [SerializeField] GameObject attackText, attackLookat;
     [SerializeField] float lineDistance;
     [SerializeField] AudioClip attackSound;
+    [SerializeField] float radius;
     RaycastHit hit;
     bool shoot, shootSuper;
     void Awake()
@@ -55,7 +56,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("MeleeReload", RpcTarget.All);
             SwordAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1, playerLayer);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -83,7 +84,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("SuperMeleeReload", RpcTarget.All);
             SwordSuperAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1, playerLayer);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -117,7 +118,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("MeleeReload", RpcTarget.All);
             SwordAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1, playerLayer);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -166,7 +167,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("SuperMeleeReload", RpcTarget.All);
             SwordSuperAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1, playerLayer);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
