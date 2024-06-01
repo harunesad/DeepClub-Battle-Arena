@@ -2733,6 +2733,7 @@ GameObject:
   - component: {fileID: 1875830338616347601}
   - component: {fileID: 4858905656391507794}
   - component: {fileID: 3910273573853081155}
+  - component: {fileID: 8234810526450967776}
   m_Layer: 0
   m_Name: WoodStump.007
   m_TagString: Untagged
@@ -2805,6 +2806,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8234810526450967776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638787706629464606}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.0000007}
+  m_Center: {x: 0.000017166138, y: 0, z: -0.000005722045}
 --- !u!1 &652492342115100272
 GameObject:
   m_ObjectHideFlags: 0
@@ -9639,6 +9661,7 @@ GameObject:
   - component: {fileID: 3112105706561627881}
   - component: {fileID: 3639963384204966187}
   - component: {fileID: 3941243448392352025}
+  - component: {fileID: 6323969591142380854}
   m_Layer: 0
   m_Name: WoodStump.004
   m_TagString: Untagged
@@ -9711,6 +9734,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6323969591142380854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416917630152214602}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 1.9999999, z: 2.0000012}
+  m_Center: {x: 0.0000038146936, y: -0.000000059604645, z: 0.000002622604}
 --- !u!1 &2422321162159049036
 GameObject:
   m_ObjectHideFlags: 0
@@ -9827,6 +9871,7 @@ GameObject:
   - component: {fileID: 666806239658746336}
   - component: {fileID: 9112568021201781679}
   - component: {fileID: 4168786142160742034}
+  - component: {fileID: 9119811929373775533}
   m_Layer: 0
   m_Name: WoodStump.008
   m_TagString: Untagged
@@ -9899,6 +9944,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9119811929373775533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2424327924648430222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.0000007}
+  m_Center: {x: -0.000011444094, y: 0.00000023841858, z: 0.000007629393}
 --- !u!1 &2462424821944683813
 GameObject:
   m_ObjectHideFlags: 0
@@ -15713,7 +15779,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8460479470021543741, guid: c70a3fe022cf10a41b0ed98614f6db0b, type: 3}
+  - {fileID: 2100000, guid: cd4a1473aa6087144bb7cf6f12b99362, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16842,6 +16908,7 @@ GameObject:
   - component: {fileID: 3046877995877924338}
   - component: {fileID: 1726827178914139376}
   - component: {fileID: 7239080578287251071}
+  - component: {fileID: 1877155253131007105}
   m_Layer: 0
   m_Name: WoodStump.003
   m_TagString: Untagged
@@ -16914,6 +16981,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1877155253131007105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483472343491070551}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.000001}
+  m_Center: {x: 0.00000035762514, y: -0.00000011920929, z: 0.0000022649765}
 --- !u!1 &4505065527300581516
 GameObject:
   m_ObjectHideFlags: 0
@@ -18721,7 +18809,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8460479470021543741, guid: c70a3fe022cf10a41b0ed98614f6db0b, type: 3}
+  - {fileID: 2100000, guid: cd4a1473aa6087144bb7cf6f12b99362, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20009,6 +20097,7 @@ GameObject:
   - component: {fileID: 5546683365845425261}
   - component: {fileID: 6891547575846664510}
   - component: {fileID: 6469831715544297802}
+  - component: {fileID: 2877503624374038508}
   m_Layer: 0
   m_Name: WoodStump.005
   m_TagString: Untagged
@@ -20081,6 +20170,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2877503624374038508
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590254527884153895}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.0000007}
+  m_Center: {x: 0.000008106232, y: 0.000003695488, z: 0.0000019073468}
 --- !u!1 &5617565781590926068
 GameObject:
   m_ObjectHideFlags: 0
@@ -21558,6 +21668,7 @@ GameObject:
   - component: {fileID: 2138572312019427407}
   - component: {fileID: 563146369245998458}
   - component: {fileID: 8055240437012596433}
+  - component: {fileID: 2406242008317495440}
   m_Layer: 0
   m_Name: WoodStump.002
   m_TagString: Untagged
@@ -21630,6 +21741,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2406242008317495440
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955922509347945041}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.0000007}
+  m_Center: {x: -0.000015258793, y: -0.00000014901161, z: 0.000001907348}
 --- !u!1 &5965480767489750742
 GameObject:
   m_ObjectHideFlags: 0
@@ -26489,7 +26621,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8460479470021543741, guid: c70a3fe022cf10a41b0ed98614f6db0b, type: 3}
+  - {fileID: 2100000, guid: cd4a1473aa6087144bb7cf6f12b99362, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28428,7 +28560,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8460479470021543741, guid: c70a3fe022cf10a41b0ed98614f6db0b, type: 3}
+  - {fileID: 2100000, guid: cd4a1473aa6087144bb7cf6f12b99362, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29428,6 +29560,7 @@ GameObject:
   - component: {fileID: 8743589090469990706}
   - component: {fileID: 3966599704570443256}
   - component: {fileID: 1710585308347401154}
+  - component: {fileID: 4016794823299892760}
   m_Layer: 0
   m_Name: WoodStump.006
   m_TagString: Untagged
@@ -29500,6 +29633,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4016794823299892760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774178067863386888}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000005, y: 2, z: 2.0000007}
+  m_Center: {x: 0.0000048279758, y: 0.0000037550926, z: -0.0000028610223}
 --- !u!1 &7785855844398199615
 GameObject:
   m_ObjectHideFlags: 0
@@ -31940,6 +32094,7 @@ GameObject:
   - component: {fileID: 948039267101983224}
   - component: {fileID: 7994869511539860048}
   - component: {fileID: 139465223067818149}
+  - component: {fileID: 3569046602159664588}
   m_Layer: 0
   m_Name: WoodStump.001
   m_TagString: Untagged
@@ -32012,6 +32167,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3569046602159664588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312298965842983570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000005, y: 2, z: 2.0000007}
+  m_Center: {x: -0.0000047087674, y: 0.000003606081, z: -0.0000019073505}
 --- !u!1 &8361470524771531163
 GameObject:
   m_ObjectHideFlags: 0

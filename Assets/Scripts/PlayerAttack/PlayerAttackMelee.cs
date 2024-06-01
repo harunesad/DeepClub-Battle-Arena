@@ -22,6 +22,8 @@ public class PlayerAttackMelee : MonoBehaviour
     [SerializeField] AudioClip attackSound;
     [SerializeField] float radius;
     RaycastHit hit;
+    Transform obstacle;
+    Collider[] colliders; 
     bool shoot, shootSuper;
     void Awake()
     {
@@ -48,15 +50,45 @@ public class PlayerAttackMelee : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
             AndroidAttack();
 #endif
+            Vector3 origin = Camera.main.transform.position;
+            Vector3 direction = (transform.position - origin).normalized;
+
+            Ray ray = new Ray(origin, direction);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("aaa");
+                if (obstacle != hit.transform && obstacle && hit.transform != transform)
+                {
+                    Color newColor = obstacle.GetComponent<Renderer>().material.color;
+                    obstacle.GetComponent<Renderer>().material.color = new Color(newColor.r, newColor.g, newColor.b, 1);
+                    obstacle = null;
+                }
+                if (hit.transform != transform)
+                {
+                    obstacle = hit.transform;
+                    Color color = obstacle.GetComponent<Renderer>().material.color;
+                    obstacle.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, .3f);
+                }
+            }
+            else
+            {
+                if (obstacle)
+                {
+                    Color color = obstacle.GetComponent<Renderer>().material.color;
+                    obstacle.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, 1);
+                    obstacle = null;
+                }
+            }
         }
     }
     void WebAttack()
     {
+        colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
         if (Input.GetMouseButtonDown(0) && time >= 1.1f && player.bulletBar.fillAmount >= (1 / maxBulletCount))
         {
             photonView.RPC("MeleeReload", RpcTarget.All);
             SwordAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -64,7 +96,6 @@ public class PlayerAttackMelee : MonoBehaviour
                 {
                     transform.LookAt(item.transform);
                     AttackSword(item, player.attack, false);
-                    enemyDetection.SetActive(true);
                     break;
                 }
                 else if (item.gameObject.layer == 9)
@@ -72,17 +103,20 @@ public class PlayerAttackMelee : MonoBehaviour
                     transform.LookAt(item.transform);
                     transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                     AttackSwordPowerup(item, player.attack);
-                    enemyDetection.SetActive(true);
                     break;
                 }
-            }
-            if (colliders.Length == 0)
-            {
-                enemyDetection.SetActive(false);
             }
             return;
         }
         WebSuperAttack();
+        if (colliders.Length == 1)
+        {
+            enemyDetection.SetActive(false);
+        }
+        else
+        {
+            enemyDetection.SetActive(true);
+        }
     }
     void WebSuperAttack()
     {
@@ -90,7 +124,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("SuperMeleeReload", RpcTarget.All);
             SwordSuperAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
+            //colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -112,6 +146,7 @@ public class PlayerAttackMelee : MonoBehaviour
     }
     void AndroidAttack()
     {
+        colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
         FixedJoystick shootJoystick = UIManager.uIManager.shootJoystick;
         if ((Mathf.Abs(shootJoystick.Horizontal) > .5f || Mathf.Abs(shootJoystick.Vertical) > .5f) && time >= 1.1f && player.bulletBar.fillAmount >= (1 / maxBulletCount))
         {
@@ -124,7 +159,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("MeleeReload", RpcTarget.All);
             SwordAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
+            //Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -159,6 +194,14 @@ public class PlayerAttackMelee : MonoBehaviour
             shoot = false;
         }
         AndroidSuperAttack();
+        if (colliders.Length == 1)
+        {
+            enemyDetection.SetActive(false);
+        }
+        else
+        {
+            enemyDetection.SetActive(true);
+        }
     }
     void AndroidSuperAttack()
     {
@@ -173,7 +216,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             photonView.RPC("SuperMeleeReload", RpcTarget.All);
             SwordSuperAnimation();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
+            //Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
@@ -343,8 +386,9 @@ public class PlayerAttackMelee : MonoBehaviour
             }
             else
             {
-                UIManager.uIManager.deathInfo.text = other.gameObject.name.Substring(0, other.gameObject.name.Length - 5);
+                UIManager.uIManager.deathInfo.text = other.gameObject.name;
             }
+            Invoke("FadeUI", 1);
             if (other.GetComponent<Player>().powerCount == 0)
             {
                 other.GetComponent<Player>().power[0].transform.parent = null;
@@ -401,6 +445,12 @@ public class PlayerAttackMelee : MonoBehaviour
     {
         GameObject prefab = Instantiate(UIManager.uIManager.damagePopup, pos, rotation);
         prefab.GetComponentInChildren<TextMesh>().text = text;
+    }
+    void FadeUI()
+    {
+        UIManager.uIManager.killImage.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.killInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.deathInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
     }
 }
 

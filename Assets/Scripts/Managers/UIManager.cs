@@ -142,7 +142,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < PhotonNetwork.PlayerListOthers.Count(); i++)
         {
             //Sýrayla oyuncularýn kameralarýna geçme
-            if (i <= GameObject.FindGameObjectsWithTag("Player").Length - 2 && PhotonNetwork.PlayerListOthers[i] != null/* && PhotonNetwork.PlayerListOthers[i + 1] != null*/ && GameObject.Find(PhotonNetwork.PlayerListOthers[i + 1].NickName) != null)
+            if (i <= GameObject.FindGameObjectsWithTag("Player").Length - 2 && PhotonNetwork.PlayerListOthers[i] != null && GameObject.Find(PhotonNetwork.PlayerListOthers[i + 1].NickName) != null)
             {
                 if (Camera.main.GetComponent<CameraFollow>().target.name == PhotonNetwork.PlayerListOthers[i].NickName)
                 {

@@ -126,8 +126,9 @@ public class Bullet : MonoBehaviourPun
             }
             else
             {
-                UIManager.uIManager.deathInfo.text = other.gameObject.name.Substring(0, other.gameObject.name.Length - 5);
+                UIManager.uIManager.deathInfo.text = other.gameObject.name;
             }
+            Invoke("FadeUI", 1);
             Debug.Log(other.GetComponent<Player>().health);
             if (other.GetComponent<Player>().powerCount == 0)
             {
@@ -202,5 +203,11 @@ public class Bullet : MonoBehaviourPun
     {
         GameObject prefab = Instantiate(UIManager.uIManager.damagePopup, pos, rotation);
         prefab.GetComponentInChildren<TextMesh>().text = text;
+    }
+    void FadeUI()
+    {
+        UIManager.uIManager.killImage.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.killInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.deathInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
     }
 }

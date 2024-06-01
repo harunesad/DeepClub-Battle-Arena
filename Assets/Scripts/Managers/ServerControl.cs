@@ -70,7 +70,7 @@ public class ServerControl : MonoBehaviourPunCallbacks
     }
     void ElectricStart()
     {
-        if (step == 2 && !start)
+        if (step == 1 && !start)
         {
             electric.gameObject.SetActive(true);
             electricPosX = 58;
@@ -220,7 +220,8 @@ public class ServerControl : MonoBehaviourPunCallbacks
         UIManager.uIManager.StepZero();
         modId = -1;
         chooseChar = -1;
-        //PhotonNetwork.Disconnect();
+        PhotonNetwork.Disconnect();
+        UIManager.uIManager.LoadingComplete(UIManager.uIManager.gameLoading);
         //PhotonNetwork.JoinLobby();
     }
     public override void OnConnectedToMaster()
@@ -346,18 +347,24 @@ public class ServerControl : MonoBehaviourPunCallbacks
         }
         else if (step == 1)
         {
-            step = 2;
-            //Rejoin();
-        }
-        else if (step == 2)
-        {
+            step = 0;
             leave = false;
             start = false;
             step = 0;
             lobbyIndex = 0;
             roomIndex = 0;
             GameExit();
+            //Rejoin();
         }
+        //else if (step == 2)
+        //{
+        //    leave = false;
+        //    start = false;
+        //    step = 0;
+        //    lobbyIndex = 0;
+        //    roomIndex = 0;
+        //    GameExit();
+        //}
         Debug.Log("Odadan ayrıldı");
     }
     public override void OnLeftLobby()

@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         avatarAnim = GetComponent<Animator>();
         if (gameObject.GetPhotonView() != null)
         {
+            newPlayer.name = gameObject.name;
             newPlayer.transform.parent = null;
             newPlayerProperty = newPlayer.GetComponent<Player>();
             newPlayerProperty.canvas.SetActive(false);
@@ -450,8 +451,9 @@ public class Player : MonoBehaviour
             }
             else
             {
-                UIManager.uIManager.deathInfo.text = gameObject.name.Substring(0, gameObject.name.Length - 5);
+                UIManager.uIManager.deathInfo.text = gameObject.name;
             }
+            Invoke("FadeUI", 1);
             if (GetComponent<Player>().powerCount == 0)
             {
                 GetComponent<Player>().power[0].transform.parent = null;
@@ -465,5 +467,11 @@ public class Player : MonoBehaviour
             Destroy(GetComponent<Player>().newPlayer);
             Destroy(gameObject);
         }
+    }
+    void FadeUI()
+    {
+        UIManager.uIManager.killImage.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.killInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
+        UIManager.uIManager.deathInfo.GetComponent<CanvasGroup>().DOFade(0, 2);
     }
 }
