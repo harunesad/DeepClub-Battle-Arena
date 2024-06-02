@@ -17,13 +17,13 @@ public class ServerControl : MonoBehaviourPunCallbacks
     public GameObject photonObj;
     public int step, index, killCount;
     public string nickName;
-    public GameObject electric;
-    float electricPosX, electricPosZ;
+    //public GameObject electric;
+    float electricScaleX, electricScaleZ;
     public bool start, leave;
-    public List<GameObject> powerups, collectable;
+    public List<GameObject> powerups, collectable, electric;
     Vector3 camPos;
     Quaternion camRot;
-    int roomIndex, lobbyIndex;
+    public int roomIndex, lobbyIndex;
     public List<GameObject> newPlayers;
     public ParticleSystem lightning;
     public float chooseSound, effectSound;
@@ -72,10 +72,10 @@ public class ServerControl : MonoBehaviourPunCallbacks
     {
         if (step == 1 && !start)
         {
-            electric.gameObject.SetActive(true);
-            electricPosX = 58;
-            electricPosZ = 80;
-            electric.transform.localScale = new Vector3(electricPosX, electric.transform.localScale.y, electricPosZ);
+            electric[modId].SetActive(true);
+            electricScaleX = electric[modId].transform.localScale.x;
+            electricScaleZ = electric[modId].transform.localScale.z;
+            electric[modId].transform.localScale = new Vector3(electricScaleX, electric[modId].transform.localScale.y, electricScaleZ);
             UIManager.uIManager.playerCount.text = GameObject.FindGameObjectsWithTag("Player").Length.ToString() + " / " + 4;
         }
         if (GameObject.FindGameObjectsWithTag("Player").Length == 4)
@@ -104,9 +104,9 @@ public class ServerControl : MonoBehaviourPunCallbacks
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
             }
-            electricPosX -= Time.deltaTime / 100;
-            electricPosZ -= Time.deltaTime / 100;
-            electric.transform.localScale = new Vector3(electricPosX, electric.transform.localScale.y, electricPosZ);
+            electricScaleX -= Time.deltaTime / 100;
+            electricScaleZ -= Time.deltaTime / 100;
+            electric[modId].transform.localScale = new Vector3(electricScaleX, electric[modId].transform.localScale.y, electricScaleZ);
             if (!leave && player == null && GameObject.FindGameObjectsWithTag("Player").Length >= 2)
             {
                 UIManager.uIManager.win.text = (GameObject.FindGameObjectsWithTag("Player").Length + 1).ToString() + ".";
@@ -190,9 +190,9 @@ public class ServerControl : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         UIManager.uIManager.StepTwo();
     }
-    void GameExit()
+    public void GameExit()
     {
-        electric.gameObject.SetActive(false);
+        electric[modId].gameObject.SetActive(false);
         for (int i = 0; i < floors.Count; i++)
         {
             floors[i].SetActive(false);
@@ -217,11 +217,8 @@ public class ServerControl : MonoBehaviourPunCallbacks
         //}
         Camera.main.transform.position = camPos;
         Camera.main.transform.rotation = camRot;
-        UIManager.uIManager.StepZero();
         modId = -1;
         chooseChar = -1;
-        PhotonNetwork.Disconnect();
-        UIManager.uIManager.LoadingComplete(UIManager.uIManager.gameLoading);
         //PhotonNetwork.JoinLobby();
     }
     public override void OnConnectedToMaster()
@@ -345,17 +342,16 @@ public class ServerControl : MonoBehaviourPunCallbacks
             //Rejoin();
             //ModActive();
         }
-        else if (step == 1)
-        {
-            step = 0;
-            leave = false;
-            start = false;
-            step = 0;
-            lobbyIndex = 0;
-            roomIndex = 0;
-            GameExit();
-            //Rejoin();
-        }
+        //else if (step == 1)
+        //{
+        //    step = 0;
+        //    leave = false;
+        //    start = false;
+        //    lobbyIndex = 0;
+        //    roomIndex = 0;
+        //    GameExit();
+        //    //Rejoin();
+        //}
         //else if (step == 2)
         //{
         //    leave = false;
@@ -375,13 +371,13 @@ public class ServerControl : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         //Bir odaya girmeye çalışınca hata oluşursa çalışan callback fonksiyon
-        if (step == 1)
+        if (step == 0)
         {
             lobbyIndex++;
             RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 4, IsOpen = true, IsVisible = true };
             PhotonNetwork.JoinOrCreateRoom("Lobby" + modId + lobbyIndex, roomOptions, TypedLobby.Default);
         }
-        else if (step == 2)
+        else if (step == 1)
         {
             roomIndex++;
             RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 4, IsOpen = true, IsVisible = true };

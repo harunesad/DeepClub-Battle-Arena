@@ -66,6 +66,7 @@ public class ElectricCrash : MonoBehaviour
             transform.GetChild(transform.childCount - 4).DORotate(new Vector3(27, 270, 90), .5f).SetEase(Ease.Linear);
             GetComponent<BoxCollider>().isTrigger = true;
             gameObject.layer = 0;
+            poison = false;
             int randomId = 1;
             transform.GetChild(randomId).gameObject.SetActive(true);
         }

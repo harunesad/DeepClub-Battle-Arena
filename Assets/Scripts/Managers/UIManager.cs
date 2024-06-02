@@ -173,11 +173,18 @@ public class UIManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(click, transform.position, .5f);
         LoadingStart(gameLoading);
-        ServerControl.server.step = 2;
+        StepZero();
+        //ServerControl.server.step = 2;
         leave.gameObject.SetActive(false);
         mainHome.gameObject.SetActive(false);
         PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        Invoke("WaitLoadingCpmlete", 2);
+        //PhotonNetwork.LeaveRoom();
+    }
+    void WaitLoadingCpmlete()
+    {
+        LoadingComplete(gameLoading);
     }
     public void LoadingStart(Image loading)
     {
@@ -239,6 +246,12 @@ public class UIManager : MonoBehaviour
         charactersBackground.gameObject.SetActive(true);
         playGame.gameObject.SetActive(true);
         nicknameText.transform.parent.parent.gameObject.SetActive(true);
+        ServerControl.server.leave = false;
+        ServerControl.server.start = false;
+        ServerControl.server.step = 0;
+        ServerControl.server.lobbyIndex = 0;
+        ServerControl.server.roomIndex = 0;
+        ServerControl.server.GameExit();
         PhotonNetwork.ConnectUsingSettings();
         LoadingStart(gameBeforeLoading);
     }

@@ -133,6 +133,6 @@ public class LobbyControl : MonoBehaviour
         {
             PhotonNetwork.LeaveRoom();
         }
-        Debug.Log("Ýstemci Durumu: " + PhotonNetwork.NetworkClientState + gameObject.GetPhotonView().ViewID);
+        //Debug.Log("Ýstemci Durumu: " + PhotonNetwork.NetworkClientState + gameObject.GetPhotonView().ViewID);
     }
 }

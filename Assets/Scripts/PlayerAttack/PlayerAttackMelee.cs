@@ -57,14 +57,13 @@ public class PlayerAttackMelee : MonoBehaviour
             RaycastHit raycastHit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("aaa");
-                if (obstacle != hit.transform && obstacle && hit.transform != transform)
+                if (obstacle != hit.transform && obstacle && hit.transform.GetComponent<Renderer>())
                 {
                     Color newColor = obstacle.GetComponent<Renderer>().material.color;
                     obstacle.GetComponent<Renderer>().material.color = new Color(newColor.r, newColor.g, newColor.b, 1);
                     obstacle = null;
                 }
-                if (hit.transform != transform)
+                if (hit.transform.GetComponent<Renderer>())
                 {
                     obstacle = hit.transform;
                     Color color = obstacle.GetComponent<Renderer>().material.color;
