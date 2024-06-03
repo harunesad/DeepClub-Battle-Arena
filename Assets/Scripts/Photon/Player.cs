@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (photonView == null && GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        if (photonView == null && !newPlayer)
         {
             Destroy(gameObject);
         }

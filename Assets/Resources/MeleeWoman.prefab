@@ -6589,6 +6589,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana (2)
@@ -6671,6 +6683,18 @@ PrefabInstance:
     - target: {fileID: 4266499287775622954, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
@@ -6755,6 +6779,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana (3)
@@ -6826,6 +6862,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana
@@ -6896,6 +6944,18 @@ PrefabInstance:
     - target: {fileID: 4266499287775622954, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
@@ -7187,6 +7247,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana (2)
@@ -7270,6 +7342,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana (4)
@@ -7304,7 +7388,7 @@ PrefabInstance:
     - target: {fileID: 4153682180115913340, guid: 7813e19060dbbdd49ad4b3a0c26783c2, type: 3}
       propertyPath: parent
       value: 
-      objectReference: {fileID: 2766882564897511128}
+      objectReference: {fileID: 6597439683770711368}
     - target: {fileID: 7822247180650933990, guid: 7813e19060dbbdd49ad4b3a0c26783c2, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -7540,6 +7624,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
       value: Bottle_Mana (3)
@@ -7610,6 +7706,18 @@ PrefabInstance:
     - target: {fileID: 4266499287775622954, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name
@@ -7693,6 +7801,18 @@ PrefabInstance:
     - target: {fileID: 4266499287775622954, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266499287775622955, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266499287775622957, guid: c7b89eae7cc286d47aa822777977f7fa, type: 3}
       propertyPath: m_Name

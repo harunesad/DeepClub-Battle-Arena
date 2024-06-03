@@ -192,7 +192,15 @@ public class ServerControl : MonoBehaviourPunCallbacks
     }
     public void GameExit()
     {
-        electric[modId].gameObject.SetActive(false);
+        leave = false;
+        start = false;
+        step = 0;
+        lobbyIndex = 0;
+        roomIndex = 0;
+        if (modId != -1)
+        {
+            electric[modId].gameObject.SetActive(false);
+        }
         for (int i = 0; i < floors.Count; i++)
         {
             floors[i].SetActive(false);
@@ -232,6 +240,10 @@ public class ServerControl : MonoBehaviourPunCallbacks
         else if (step == 1)
         {
             Rejoin();
+        }
+        else if (step == 2)
+        {
+            PhotonNetwork.Disconnect();
         }
         //PhotonNetwork.JoinLobby();
     }
@@ -342,16 +354,11 @@ public class ServerControl : MonoBehaviourPunCallbacks
             //Rejoin();
             //ModActive();
         }
-        //else if (step == 1)
-        //{
-        //    step = 0;
-        //    leave = false;
-        //    start = false;
-        //    lobbyIndex = 0;
-        //    roomIndex = 0;
-        //    GameExit();
-        //    //Rejoin();
-        //}
+        else if (step == 1)
+        {
+            step = 2;
+            //Rejoin();
+        }
         //else if (step == 2)
         //{
         //    leave = false;

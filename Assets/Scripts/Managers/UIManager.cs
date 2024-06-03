@@ -171,18 +171,19 @@ public class UIManager : MonoBehaviour
     }
     void LeaveRoom()
     {
+        UIClose();
         AudioSource.PlayClipAtPoint(click, transform.position, .5f);
         LoadingStart(gameLoading);
         StepZero();
         //ServerControl.server.step = 2;
-        leave.gameObject.SetActive(false);
-        mainHome.gameObject.SetActive(false);
+        //leave.gameObject.SetActive(false);
+        //mainHome.gameObject.SetActive(false);
         PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.Disconnect();
-        Invoke("WaitLoadingCpmlete", 2);
+        PhotonNetwork.LeaveRoom();
+        Invoke("WaitLoadingComplete", 2);
         //PhotonNetwork.LeaveRoom();
     }
-    void WaitLoadingCpmlete()
+    void WaitLoadingComplete()
     {
         LoadingComplete(gameLoading);
     }
@@ -202,7 +203,7 @@ public class UIManager : MonoBehaviour
     }
     void UIClose()
     {
-        for (int i = 0; i < canvas.transform.childCount - 4; i++)
+        for (int i = 0; i < canvas.transform.childCount - 2; i++)
         {
             if (canvas.transform.GetChild(i).gameObject.activeSelf)
             {
@@ -246,11 +247,11 @@ public class UIManager : MonoBehaviour
         charactersBackground.gameObject.SetActive(true);
         playGame.gameObject.SetActive(true);
         nicknameText.transform.parent.parent.gameObject.SetActive(true);
-        ServerControl.server.leave = false;
-        ServerControl.server.start = false;
-        ServerControl.server.step = 0;
-        ServerControl.server.lobbyIndex = 0;
-        ServerControl.server.roomIndex = 0;
+        //ServerControl.server.leave = false;
+        //ServerControl.server.start = false;
+        //ServerControl.server.step = 0;
+        //ServerControl.server.lobbyIndex = 0;
+        //ServerControl.server.roomIndex = 0;
         ServerControl.server.GameExit();
         PhotonNetwork.ConnectUsingSettings();
         LoadingStart(gameBeforeLoading);
