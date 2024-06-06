@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using System.Linq;
 using DG.Tweening;
-using UnityEngine.AI;
-using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -77,7 +76,8 @@ public class UIManager : MonoBehaviour
     }
     void SurvivorOpen()
     {
-        Application.OpenURL("https://deeplaystudio.itch.io/survivor");
+        //Application.OpenURL("https://deeplaystudio.itch.io/survivor");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     void Character()
     {
@@ -178,6 +178,7 @@ public class UIManager : MonoBehaviour
         //ServerControl.server.step = 2;
         //leave.gameObject.SetActive(false);
         //mainHome.gameObject.SetActive(false);
+        ServerControl.server.floors[ServerControl.server.modId].SetActive(false);
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.LeaveRoom();
         Invoke("WaitLoadingComplete", 2);

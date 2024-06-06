@@ -201,10 +201,10 @@ public class ServerControl : MonoBehaviourPunCallbacks
         {
             electric[modId].gameObject.SetActive(false);
         }
-        for (int i = 0; i < floors.Count; i++)
-        {
-            floors[i].SetActive(false);
-        }
+        //for (int i = 0; i < floors.Count; i++)
+        //{
+        //    floors[i].SetActive(false);
+        //}
         for (int i = 0; i < powerups.Count; i++)
         {
             powerups[i].SetActive(false);

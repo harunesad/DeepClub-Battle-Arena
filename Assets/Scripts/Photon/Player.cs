@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         healthText.text = health.ToString();
         newPlayer.name = myName + "Clone";
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (photonView == null && !newPlayer)
         {
@@ -196,17 +196,17 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
-        {
-            wall = true;
-        }
+        //if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
+        //{
+        //    wall = true;
+        //}
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
-        {
-            StartCoroutine(NotWall());
-        }
+        //if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
+        //{
+        //    StartCoroutine(NotWall());
+        //}
     }
     IEnumerator NotWall()
     {
@@ -268,11 +268,11 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
                 Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
                 pressed = false;
-            if (wall)
-            {
-                inputX = -inputX;
-                inputZ = -inputZ;
-            }
+            //if (wall)
+            //{
+            //    inputX = -inputX;
+            //    inputZ = -inputZ;
+            //}
             Vector3 direction = new Vector3(inputZ, 0, -inputX).normalized;
             if (direction.magnitude >= .1f)
             {

@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 4731bc58657040e40aa451b4eec7ea8a
+  - enabled: 1
+    path: Assets/Scenes/Survivor/SurvivorMenu.unity
+    guid: 68615f468e2a9844990a391c92416ab3
+  - enabled: 1
+    path: Assets/Scenes/Survivor/Game.unity
+    guid: c28b36a9a9c804c44b5b00349a8d1d4f
   m_configObjects: {}

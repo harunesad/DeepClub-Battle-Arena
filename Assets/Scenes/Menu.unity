@@ -1932,6 +1932,8 @@ MonoBehaviour:
   electric:
   - {fileID: 657284588}
   - {fileID: 1868956364}
+  roomIndex: 0
+  lobbyIndex: 0
   newPlayers:
   - {fileID: 0}
   - {fileID: 0}
@@ -5381,8 +5383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685, y: 200}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -690, y: 200}
+  m_SizeDelta: {x: 60, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &325006164
 MonoBehaviour:
@@ -5404,7 +5406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 936345f7fc3934efa8119a8700d904c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b148b7471a853147a57b1c11598d39a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5702,7 +5704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: ss
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0dffa87541a0a0944b0a6ef65eafab38, type: 2}
   m_sharedMaterial: {fileID: -2969167684564589687, guid: 0dffa87541a0a0944b0a6ef65eafab38, type: 2}
@@ -5729,14 +5731,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -25593,7 +25595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: ss
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0dffa87541a0a0944b0a6ef65eafab38, type: 2}
   m_sharedMaterial: {fileID: -2969167684564589687, guid: 0dffa87541a0a0944b0a6ef65eafab38, type: 2}
@@ -25620,14 +25622,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
