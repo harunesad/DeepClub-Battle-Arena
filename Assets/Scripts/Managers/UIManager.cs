@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     }
     void LeaveGame()
     {
-        Application.Quit();
+        Application.OpenURL("https://deeplaystudio.itch.io/deepclub-new-gen-li-spaces");
     }
     void Games()
     {

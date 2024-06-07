@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public float turnSmoothTime = .5f, turnSmoothVelocity;
     public LayerMask hideLayer;
     public List<GameObject> meshes;
-    public bool inGrass, wall;
+    public bool inGrass;
     public GameObject newPlayer;
     public float reloadTime;
     public AudioClip collect;
@@ -194,25 +194,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
-        //{
-        //    wall = true;
-        //}
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        //if (photonView.IsMine && !collision.gameObject.CompareTag("Ground"))
-        //{
-        //    StartCoroutine(NotWall());
-        //}
-    }
-    IEnumerator NotWall()
-    {
-        yield return new WaitForSeconds(.15f);
-        wall = false;
-    }
     void PoisonActive()
     {
         if (poison)
@@ -268,11 +249,6 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
                 Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
                 pressed = false;
-            //if (wall)
-            //{
-            //    inputX = -inputX;
-            //    inputZ = -inputZ;
-            //}
             Vector3 direction = new Vector3(inputZ, 0, -inputX).normalized;
             if (direction.magnitude >= .1f)
             {
