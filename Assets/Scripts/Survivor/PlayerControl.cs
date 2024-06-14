@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 movement;
     public float moveSpeed;
     public List<Transform> points;
+    [SerializeField] List<Vector3> pointsPos;
     public GameManager gameManager;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float animFinish;
@@ -18,6 +19,11 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
+        for (int i = 0; i < points.Count; i++)
+        {
+            pointsPos.Add(points[i].position);
+            points[i].parent = null;
+        }
     }
     void Start()
     {
@@ -28,6 +34,10 @@ public class PlayerControl : MonoBehaviour
         survivorMoveSpeed = moveSpeed * gameManager.gameUIManager.thirstyBar.fillAmount * gameManager.gameUIManager.hungryBar.fillAmount;
         if (movable && gameManager.gameUIManager.StaminaUpdate(1))
         {
+            for (int i = 0; i < points.Count; i++)
+            {
+                points[i].position = transform.position + pointsPos[i];
+            }
             Move();
         }
         if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
@@ -46,9 +56,20 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !gameManager.enemyList.Contains(other.transform) && gameManager.enemyList.Count < 8)
+        if (other.gameObject.layer == 6 && gameManager.enemyList.Count < 8)
         {
-            gameManager.enemyList.Add(other.transform);
+            for (int i = 0; i < gameManager.enemyList.Count; i++)
+            {
+                if (gameManager.enemyList[i].enemy == other.transform)
+                {
+                    return;
+                }
+            }
+            EnemyProp enemyProp = new EnemyProp();
+            enemyProp.enemy = other.transform;
+            enemyProp.attack = false;
+
+            gameManager.enemyList.Add(enemyProp);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -115,10 +136,10 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
             Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             pressed = false;
-        if (!pressed)
+        inputX = Input.GetAxis("Horizontal");
+        inputZ = Input.GetAxis("Vertical");
+        if (inputX != 0 || inputZ != 0)
         {
-            inputX = Input.GetAxis("Horizontal");
-            inputZ = Input.GetAxis("Vertical");
             Vector3 direction = new Vector3(inputX, 0, inputZ).normalized;
             float targetAngle = 0;
             if (direction.magnitude >= .1f)
@@ -131,7 +152,7 @@ public class PlayerControl : MonoBehaviour
             transform.Translate(movement * survivorMoveSpeed * Time.deltaTime, Space.World);
             playerAnim.SetBool("Walk", true);
         }
-        else if (pressed)
+        else
         {
             playerAnim.SetBool("Walk", false);
         }
